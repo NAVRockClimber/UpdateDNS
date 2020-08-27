@@ -30,7 +30,7 @@ while [  $n -lt $arrayLength ]; do
     family=$(echo $addrArray | jq -r ".[$n].family")
     ip=$(echo $addrArray | jq -r ".[$n].local")
     if [ $scope = global ] && [ $family = inet6 ]; then
-        echo $family $scope $ip
+        # echo $family $scope $ip
         Param6="AAAA=$ip&Hostname=$Hostname&autocreate=$autocreate&ResourceGroupName=$ResourceGroupName&ZoneName=$ZoneName"
         url6="$baseUrl?$Param6"
         response=$(curl -H "$Header" -X GET --write-out '%{http_code}' --silent $url6)
@@ -38,7 +38,7 @@ while [  $n -lt $arrayLength ]; do
     let n+=1
 done
 if [ $AutoDetect = "true" ]; then
-    echo AutoDetect IPV4
+    # echo AutoDetect IPV4
     Param4="AutoDetect=$AutoDetect&Hostname=$Hostname&autocreate=$autocreate&ResourceGroupName=$ResourceGroupName&ZoneName=$ZoneName"
     url4="$baseUrl?$Param4"
     response=$(curl -H "$Header" -X GET --write-out '%{http_code}' --silent $url4)
